@@ -15,18 +15,28 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _input;
     private CharacterController _characterController;
     private Vector3 _direction;
+    public Animator slash;
 
     [SerializeField] private float smoothTime = 0.05f;
     private float _currentVelocity;
 
     [SerializeField] private float speed;
 
+    private void Start()
+    {
+        slash = gameObject.GetComponent<Animator>();
+    }
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
     }
-    private void Update()
+    void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            slash.SetTrigger("Active");
+        }
+        
         ApplyGravity();
         ApplyRotation();
         ApplyMovement();
